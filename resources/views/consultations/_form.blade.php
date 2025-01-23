@@ -5,8 +5,8 @@
 
 <div class="row">
     <div class="form-group col-12 col-md-4">
-        {{-- <label for="consultation_date" class="form-label">Data e Hora da Consulta</label> --}}
-        {{-- <input type="datetime-local" name="consultation_date" id="consultation_date" class="form-control @error('consultation_date') is-invalid @enderror" value="{{ old('consultation_date', $expertise->label ?? '') }}" autofocus @required(true) /> --}}
+        <label for="consultation_date" class="form-label">Data e Hora da Consulta</label>
+        <input type="datetime-local" name="consultation_date" id="consultation_date" class="form-control @error('consultation_date') is-invalid @enderror" value="{{ old('consultation_date', $expertise->label ?? '') }}" autofocus @required(true) />
     </div>
     <div class="form-group col-12 col-md-4">
         <label for="patient_id" class="form-label">Paciente</label>

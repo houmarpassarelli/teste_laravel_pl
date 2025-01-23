@@ -30,12 +30,18 @@
 @section("js")
     <script>
 
+        $(document).ready(() => {
+            $("#cep").mask("00000-000");
+            $("#cpf").mask("000.000.000-00", { reverse: true });
+            $("#phone").mask("(00) 00000-0000");
+        });
+
         const origin = window.location.origin;
         let url = `${origin}/cep/`;
 
         document.querySelector("#cep").addEventListener("input", (e) => {
 
-            const value = e.target.value;
+            const value = e.target.value.replace("-", "");
 
             if(value.length == 8){
 

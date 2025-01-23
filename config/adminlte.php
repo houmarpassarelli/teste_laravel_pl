@@ -487,6 +487,16 @@ return [
                 ],
             ],
         ],
+        'JqueryInputMask' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js',
+                ]
+            ],
+        ],
         'Chartjs' => [
             'active' => false,
             'files' => [
