@@ -34,8 +34,16 @@
                 <tbody>
                     @forelse ($consultations as $item)
                         <tr>
-                            <td>{{$item->id}}</td>
-                            <td>{{$item->name}}</td>
+                            <td>
+                                <a href="{{ route('consultations.show', $item) }}">
+                                    {{$item->id}}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('consultations.show', $item) }}">
+                                    {{$item->name}}
+                                </a>
+                            </td>
                             <td>{{$item->email}}</td>
                             <td>{{$item->phone->phone_number}}</td>
                             <td>{{(new DateTime($item->created_at))->format("d/m/Y H:i")}}</td>

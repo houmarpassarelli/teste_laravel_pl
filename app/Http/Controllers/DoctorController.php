@@ -51,7 +51,7 @@ class DoctorController extends Controller
      */
     public function show(Doctor $doctor)
     {
-        $payload = $doctor::with("expertise")->get()[0];
+        $payload = $doctor::with("expertise")->first();
 
         return view("doctors.show", [
             'module' => $this->module,
@@ -63,24 +63,34 @@ class DoctorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Doctor $doctor)
     {
-        //
+        $payload = $doctor::with("expertise")->first();
+
+        return view("doctors.edit", [
+            'module' => $this->module,
+            'url' => $this->url,
+            'payload' => $payload
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(DoctorRequest $request, Doctor $doctor)
     {
-        //
+        $doctor->update($request->validated());
+
+        return redirect()->route("doctors.index");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Doctor $doctor)
     {
-        //
+        $doctor->delete();
+
+        return redirect()->route("doctors.index");
     }
 }

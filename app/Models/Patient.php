@@ -28,7 +28,7 @@ class Patient extends Model
 
     protected function casts(): array
     {
-        $fields = ['cep', 'cpf'];
+        $fields = ['cep', 'cpf', 'phone'];
 
         return array_fill_keys($fields, RemoveMaskCast::class);
     }

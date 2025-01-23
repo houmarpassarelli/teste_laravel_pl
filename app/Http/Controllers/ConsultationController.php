@@ -40,39 +40,57 @@ class ConsultationController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(ConsultationRequest $request)
-    {   exit("teste");
-        // exit(var_dump($request));
+    {   
+        Consultation::create($request->validated());
+
+        redirect()->route("consultations.index");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Consultation $consultation)
     {
-        //
+        $payload = $consultation::with(['doctor', 'patient'])->first();
+
+        return view("consultations.show", [
+            'module' => $this->module,
+            'url' => $this->url,
+            'payload' => $payload
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Consultation $consultation)
     {
-        //
+        $payload = $consultation::with(['doctor', 'patient'])->first();
+
+        return view("consultations.show", [
+            'module' => $this->module,
+            'url' => $this->url,
+            'payload' => $payload
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ConsultationRequest $request, Consultation $consultation)
     {
-        //
+        $consultation->update($request->validated());
+
+        return redirect()->route("consultations.index");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Consultation $consultation)
     {
-        //
+        $consultation->delete();
+
+        return redirect()->route("consultations.index");
     }
 }

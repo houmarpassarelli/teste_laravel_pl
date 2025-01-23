@@ -60,24 +60,32 @@ class ExpertiseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Expertise $expertise)
     {
-        //
+        return view("patients.edit", [
+            'module' => $this->module,
+            'url' => $this->url,
+            'payload' => $expertise
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ExpertiseRequest $request, Expertise $expertise)
     {
-        //
+        $expertise->update($request->validated());
+
+        return redirect()->route("expertises.index");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Expertise $expertise)
     {
-        //
+        $expertise->delete();
+
+        return redirect()->route("expertises.index");
     }
 }

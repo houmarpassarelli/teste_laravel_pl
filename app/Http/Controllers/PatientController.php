@@ -59,7 +59,7 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        $payload = $patient::with("phone")->get()[0];
+        $payload = $patient::with("phone")->first();
 
         return view("patients.show", [
             'module' => $this->module,
@@ -71,24 +71,37 @@ class PatientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Patient $patient)
     {
-        //
+        $payload = $patient::with("phone")->first();
+
+        return view("patients.edit", [
+            'module' => $this->module,
+            'url' => $this->url,
+            'payload' => $payload
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PatientRequest $request, Patient $patient)
     {
-        //
+        $patient->update($request->validated());
+
+        return redirect()->route("patients.index");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Patient $patient)
     {
-        //
+
+        $destroy = $patient::with("phone")->first();
+        $destroy->phone->delete();
+        $destroy->delete();
+
+        return redirect()->route("patients.index");
     }
 }
